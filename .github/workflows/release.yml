@@ -1,0 +1,46 @@
+name: Release Workflow
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 获取所有历史记录，以便能正确生成版本号等信息
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Create zip archive
+        run: |
+          zip -r "${GITHUB_REPOSITORY##*/}-${{ steps.get_version.outputs.VERSION }}.zip" . -x "*.git*" "*.zip" ".github/*" # 排除不需要的文件或目录
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
