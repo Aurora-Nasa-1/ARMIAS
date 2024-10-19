@@ -3,31 +3,32 @@ name: Release Workflow
 on:
   push:
     tags:
-      - '*'
+      - 'v*' # 触发条件，仅当推送符合 v* 模式的 tag 时触发
 
 jobs:
-  build:
-    name: Build and Release
+  build-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # 获取所有历史记录，以便能正确生成版本号等信息
+          fetch-depth: 0
 
-      - name: Get the version
+      - name: Get the version from tag
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF#refs/*/}
+          echo "Releasing version ${GITHUB_REF#refs/*/}"
 
       - name: Create zip archive
         run: |
-          zip -r "${GITHUB_REPOSITORY##*/}-${{ steps.get_version.outputs.VERSION }}.zip" . -x "*.git*" "*.zip" ".github/*" # 排除不需要的文件或目录
+          zip -r "${GITHUB_REPOSITORY##*/}-${GITHUB_REF#refs/*/}.zip" . -x "*.git*" "*.zip" ".github/*"
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用默认的 GITHUB_TOKEN
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -35,12 +36,12 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
-        id: upload-release-asset 
+        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
           asset_name: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
           asset_content_type: application/zip
