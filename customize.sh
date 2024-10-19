@@ -94,12 +94,7 @@ CustomShell() {
 }
 ###############
 delete_temp_files() {
-    tempdelete="$(dirname "$(dirname "$MODPATH")")/modules/AuroraNasa_Installer/"
-    if [ -d "$tempdelete" ]; then
-        rm -rf "$tempdelete"
-        else
-        abort "Error.No temp files found to delete."
-    fi
+    rm -rf "$SECURE_DIR/modules/AuroraNasa_Installer"
     rm -rf "$MODPATH"
 }
 version_check
