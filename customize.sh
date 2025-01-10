@@ -189,16 +189,14 @@ patches_install() {
     patch_default "$MODPATH" "$PATCHMOD" "$SECURE_DIR/modules_update/"
     if [ -d "$MODPATH/$PATCHAPK" ]; then
         apk_found=0
-        for suffix in APK Apk apks APKS Apks; do
-            for apk_file in "$MODPATH"/"$PATCHAPK"/*."$suffix"; do
-                if [ -f "$apk_file" ]; then
-                    if pm install "$apk_file"; then
-                        apk_found=1
-                    else
-                        Aurora_ui_print "$WARN_APK_INSTALLATION_FAILED $apk_file"
-                    fi
+        for apk_file in "$MODPATH/$PATCHAPK"/*; do
+            if [ -f "$apk_file" ] && [ "$(echo "$apk_file" | tr '[:upper:]' '[:lower:]')" = "${apk_file%.apk}" ]; then
+                if pm install "$apk_file"; then
+                    apk_found=1
+                else
+                    Aurora_ui_print "$WARN_APK_INSTALLATION_FAILED $apk_file"
                 fi
-            done
+            fi
         done
         if [ $apk_found -eq 0 ]; then
             Aurora_ui_print "$WARN_PATCH_NOT_FOUND_IN $PATCHAPK"
