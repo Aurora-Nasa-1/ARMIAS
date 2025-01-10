@@ -20,6 +20,11 @@ main() {
         . "$MODPATH/$langpath"
         eval "lang_$print_languages"
     fi
+    # 解压prebuilts文件
+    if [ -f "$MODPATH/prebuilts.tar.xz" ]; then
+        mkdir -p "$MODPATH/prebuilts"
+        tar -xJf "$MODPATH/prebuilts.tar.xz" -C "$MODPATH/prebuilts"
+    fi
     version_check
     sclect_settings_install_on_main
     patches_install
