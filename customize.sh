@@ -389,6 +389,13 @@ sclect_settings_install_on_main() {
 }
 #About_the_custom_script
 ###############
+App_data_patch_set_permissions() {
+    Aurora_test_input "App_data_patch_set_permissions" "1" "$1"
+    Aurora_test_input "App_data_patch_set_permissions" "2" "$2"
+    patch_default "$MODPATH" "$2" "$SDCARD/Android/data/$1/"
+    uid=$(pm dump "$1" | grep 'userId=' | awk -F'=' '{print $2}')
+    chown -R "$uid":1078 "$SDCARD/Android/data/$1/"
+}
 mv_adb() {
     Aurora_test_input "mv_adb" "1" "$1"
     su -c mv "$MODPATH/$1"/* "/data/adb/"

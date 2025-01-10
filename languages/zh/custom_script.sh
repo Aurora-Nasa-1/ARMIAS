@@ -20,8 +20,8 @@
 
 # 示例：安装单个模块
 # -----------------
-# Installer "$MODPATH/模块路径.zip" #来安装指定的模块。
-# 针对特定root方案，使用Installer "$MODPATH/模块路径.zip" "KSU或者APATCH或者magisk" 会在检测到目标环境时自动执行安装,否则不会执行安装。
+# Installer "$MODPATH/模块路径.zip" # 来安装指定的模块。
+# 针对特定root方案，使用 Installer "$MODPATH/模块路径.zip" "KSU或者APATCH或者magisk" 会在检测到目标环境时自动执行安装，否则不会执行安装。
 
 # 示例：兼容模式安装
 # ----------------
@@ -29,16 +29,16 @@
 
 # 示例：解压单个文件
 # ----------------
-# un7z "需要解压的文件名"  "目标文件夹" #来解压指定文件。
+# un7z "需要解压的文件名"  "目标文件夹" # 来解压指定文件。
 
 # 示例：音量键选择安装模块
 # ---------------------
-# 使key_installer "$MODPATH/上键模块路径.zip" "$MODPATH/下键模块路径.zip" "需要打印的上键模块名" "需要打印的下键模块名" #来通过音量键选择安装的模块。
-# 如果不填写模块名称，安装时不会显示相关提示。、
+# 使用 key_installer "$MODPATH/上键模块路径.zip" "$MODPATH/下键模块路径.zip" "需要打印的上键模块名" "需要打印的下键模块名" # 来通过音量键选择安装的模块。
+# 如果不填写模块名称，安装时不会显示相关提示。
 
 # 示例：音量键选择是否安装模块
 # -----------------
-# key_installer_once "$MODPATH/模块路径.zip" "需要打印的模块名" #来通过音量键选择是否安装模块。
+# key_installer_once "$MODPATH/模块路径.zip" "需要打印的模块名" # 来通过音量键选择是否安装模块。
 
 # 示例：从Github仓库中获取最新release文件链接
 # github_get_url "仓库作者/仓库名称" "需要release中包含的文件名"
@@ -49,7 +49,7 @@
 
 # 示例：检测音量键选择
 # ------------------
-# key_select #调用后，可以通过 $key_pressed 变量获取用户通过音量键的选择结果。
+# key_select # 调用后，可以通过 $key_pressed 变量获取用户通过音量键的选择结果。
 
 # 任意补丁
 # patch_default "$MODPATH" "原先的路径" "补丁路径"
@@ -66,7 +66,11 @@
 
 # 示例：添加到magisk的denylist
 # -----------------
-# magisk_denylist_add "软件包名" #仅magisk支持
+# magisk_denylist_add "软件包名" # 仅magisk支持
+
+# 示例：修补app的安卓数据目录
+# -----------------
+# App_data_patch_set_permissions "软件包名" "文件夹路径"
 
 # 示例：刷写boot分区
 # -----------------
