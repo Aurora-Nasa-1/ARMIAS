@@ -30,7 +30,7 @@ if [ $? -eq 0 ]; then
 else
     echo "Failed to create archive for directory: output.tar.zst"
 fi
-    $zips a "$current_dir"/ARMIAS.zip "$current_dir/"*
+    $zips a "$current_dir"/ARMIAS.zip "$current_dir/"* -xr!"$current_dir/files/*"
     return_code=$?
 if [ "$return_code" -eq 0 ]; then
     echo "Successfully created archive: $current_dir/ARMIAS.zip"
