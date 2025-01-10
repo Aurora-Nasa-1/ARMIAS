@@ -38,6 +38,10 @@ jobs:
         run: |
           tar -cJf prebuilts.tar.xz prebuilts
 
+      - name: Delete contents of prebuilts folder
+        run: |
+          rm -rf prebuilts/*
+
       - name: Compress repository for each language version
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0)
