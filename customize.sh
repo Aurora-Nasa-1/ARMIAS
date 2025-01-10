@@ -20,7 +20,6 @@ main() {
         . "$MODPATH/$langpath"
         eval "lang_$print_languages"
     fi
-    # 解压prebuilts文件
     if [ -f "$MODPATH/prebuilts.tar.xz" ]; then
         mkdir -p "$MODPATH/prebuilts"
         tar -xJf "$MODPATH/prebuilts.tar.xz" -C "$MODPATH/prebuilts"
@@ -34,17 +33,40 @@ main() {
 #######################################################
 Aurora_ui_print() {
     sleep 0.02
-    ui_print "[${OUTPUT}] $1"
+    echo "[${OUTPUT}] $1"
 }
 
 Aurora_abort() {
-    ui_print "[${ERROR_TEXT}] $1"
+    echo "[${ERROR_TEXT}] $1"
     abort "$ERROR_CODE_TEXT: $2"
 }
 Aurora_test_input() {
     if [ -z "$3" ]; then
         Aurora_ui_print "$1 ( $2 ) $WARN_MISSING_PARAMETERS"
     fi
+}
+print_title() {
+    if [ -n "$2" ]; then
+        Aurora_ui_print "$1 $2"
+    fi
+}
+ui_print() {
+    if [ "$1" = "- Setting permissions" ]; then
+        return
+    fi
+    if [ "$1" = "- Extracting module files" ]; then
+        return
+    fi
+    if [ "$1" = "- Current boot slot: $SLOT" ]; then
+        return
+    fi
+    if [ "$1" = "- Device is system-as-root" ]; then
+        return
+    fi
+    if [ "$(echo "$1" | grep -c '^ - Mounting ')" -gt 0 ]; then
+        return
+    fi
+    Aurora_ui_print "$1"
 }
 #######################################################
 version_check() {
@@ -81,6 +103,7 @@ Installer() {
             return
         fi
     fi
+    Aurora_ui_print "$MODULE_INTRO"
     if [ "$KSU" = true ]; then
         if [ "$KSU_VER_CODE" -le "$ksu_min_normal_version" ]; then
             Installer_Compatibility=true
@@ -131,6 +154,7 @@ Installer() {
         rm -rf "$temp_dir"
         KSU_step_skip=""
     fi
+    Aurora_ui_print "$MODULE_FINNSH"
 }
 initialize_install() {
     local dir="$1"
