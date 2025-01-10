@@ -24,7 +24,6 @@ main() {
     sclect_settings_install_on_main
     patches_install
     CustomShell
-    remove_files
     ClearEnv
 }
 #######################################################
