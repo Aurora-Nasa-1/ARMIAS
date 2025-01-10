@@ -2,16 +2,29 @@
 
 # Highly Customizable Automatic Installation Module
 
+## Introduction
+
+This module aims to provide a highly customizable automatic installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
+
 ## Basic Operations
+
+### 1. Preparation
 
 - Simply place all modules (zip files) into the `./files/modules` folder.
   **Note**: Please ensure that file names **do not contain special characters**.
-- Unzip this module's zip folder and run `backup_all_modules_zip.sh` to back up all modules.
-- Run `Make_module.sh` to package this module.
+- Unzip this module's zip folder.
+
+### 2. Backup All Modules
+
+- Run `backup_all_modules_zip.sh` to back up all modules.
+
+### 3. Package the Module
+
+- Run `Make_module.sh` to package this module. (and compress all files using zstd)
 
 ## Advanced Features (Optional Reading)
 
-### Backup and Compression
+### Backup and Compression (High Compression Ratio)
 
 - Run `backup_modules_zstd_all_files.sh` to back up modules (folders) and compress all module files using zstd. This script will also automatically compress this module.
 
@@ -58,8 +71,18 @@
 
 ## User Guide
 
+### 1. Preparation
+
 - Place modules (zip files) into the `./files/modules` folder.
 - Organize other files into corresponding subfolders within the `./files/patches` folder.
+
+### 2. Backup All Modules
+
+- Run `backup_all_modules_zip.sh` to back up all modules.
+
+### 3. Package the Module
+
+- Run `Make_module.sh` to package this module.
 
 ## Important Note
 
