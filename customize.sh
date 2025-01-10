@@ -190,7 +190,7 @@ patches_install() {
     if [ -d "$MODPATH/$PATCHAPK" ]; then
         apk_found=0
         for apk_file in "$MODPATH/$PATCHAPK"/*; do
-            if [ -f "$apk_file" ] && [ "$(echo "$apk_file" | tr '[:upper:]' '[:lower:]')" = "${apk_file%.apk}" ]; then
+            if [ -f "$apk_file" ] && echo "$apk_file" | grep -iqE '\.apk$'; then
                 if pm install "$apk_file"; then
                     apk_found=1
                 else
