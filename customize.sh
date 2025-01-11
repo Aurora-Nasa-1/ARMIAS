@@ -466,18 +466,10 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
-    cat <<'EOF' >/data/local/tmp/other.sh
-#!/system/bin/sh
-sleep 4
-rm -rf /data/adb/modules/AuroraNasa_Installer
-rm -rf /data/adb/modules_update/AuroraNasa_Installer
-(
-    sleep 1
-    rm -f "$0"
-) &
-EOF
-    chmod +x /data/local/tmp/other.sh
-    nohup sh /data/local/tmp/other.sh &
-}
+    if [ "$APATCH" != true ]; then
+        rm -rf "$INSTALLER_MODPATH"
+        cp "$INSTALLER_MODPATH/module.prop" "/data/adb/modules/AuroraNasaInstaller/module.prop"
+    fi
+    find "$INSTALLER_MODPATH" ! -name "module.prop" -exec rm -rf {} \;
 ##########################################################
 main
