@@ -466,10 +466,7 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
-    if [ "$APATCH" != true ]; then
-        rm -rf "$INSTALLER_MODPATH"
-        cp "$INSTALLER_MODPATH/module.prop" "/data/adb/modules/AuroraNasaInstaller/module.prop"
-    fi
+    cp "$INSTALLER_MODPATH/module.prop" "/data/adb/modules/AuroraNasaInstaller/module.prop"
     find "$INSTALLER_MODPATH" ! -name "module.prop" -exec rm -rf {} \;
 }
 ##########################################################
