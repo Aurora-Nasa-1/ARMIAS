@@ -6,6 +6,8 @@
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
 main() {
+    eval "$original_print_title"
+    eval "$original_ui_print"
     INSTALLER_MODPATH="$MODPATH"
     if [ ! -f "$MODPATH/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
@@ -45,11 +47,15 @@ Aurora_test_input() {
         Aurora_ui_print "$1 ( $2 ) $WARN_MISSING_PARAMETERS"
     fi
 }
+original_print_title=$(cat <<'EOF'
 print_title() {
     if [ -n "$2" ]; then
         Aurora_ui_print "$1 $2"
     fi
 }
+EOF
+)
+original_ui_print=$(cat <<'EOF'
 ui_print() {
     if [ "$1" = "- Setting permissions" ]; then
         return
@@ -68,6 +74,8 @@ ui_print() {
     fi
     Aurora_ui_print "$1"
 }
+EOF
+)
 #######################################################
 version_check() {
     if [ -n "$KSU_VER_CODE" ] && [ "$KSU_VER_CODE" -lt "$ksu_min_version" ] || [ "$KSU_KERNEL_VER_CODE" -lt "$ksu_min_kernel_version" ]; then
