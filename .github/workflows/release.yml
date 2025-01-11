@@ -36,7 +36,7 @@ jobs:
 
       - name: Compress prebuilts folder
         run: |
-          tar -cJf prebuilts.tar.xz prebuilts
+          tar -cJf prebuilts.tar.xz prebuilts/*
 
       - name: Delete contents of prebuilts folder
         run: |
