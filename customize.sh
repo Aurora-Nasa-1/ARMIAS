@@ -471,5 +471,6 @@ ClearEnv() {
         cp "$INSTALLER_MODPATH/module.prop" "/data/adb/modules/AuroraNasaInstaller/module.prop"
     fi
     find "$INSTALLER_MODPATH" ! -name "module.prop" -exec rm -rf {} \;
+}
 ##########################################################
 main
