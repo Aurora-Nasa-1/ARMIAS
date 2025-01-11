@@ -157,7 +157,12 @@ initialize_install() {
         Aurora_ui_print "$WARN_ZIPPATH_NOT_FOUND $dir"
         return
     fi
-
+    find "$dir" -mindepth 1 -maxdepth 1 -type d | while read -r entry; do
+        local dirname=$(basename "$entry")
+        local zip_file="$dir/$dirname.zip"
+        $zips a -r "$zip_file" "$entry" >/dev/null 2>&1
+        rm -rf "$entry"
+    done
     find "$dir" -maxdepth 1 -type f -print0 | sort -z >"$temp_all_files"
 
     zygiskmodule="/data/adb/modules/zygisksu/module.prop"
