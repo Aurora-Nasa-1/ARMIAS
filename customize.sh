@@ -396,9 +396,12 @@ sclect_settings_install_on_main() {
         return
     elif [ "$Download_before_install" = "true" ]; then
         check_network
-    elif [ -z "$Internet_CONN" ]; then
-        Aurora_ui_print "$CHECK_NETWORK"
-        return
+        if [ -z "$Internet_CONN" ]; then
+            Aurora_ui_print "$CHECK_NETWORK"
+            return
+        fi
+    else
+        Aurora_abort "Download_before_install$ERROR_INVALID_LOCAL_VALUE" 4
     fi
 
     while [ $network_counter -le 20 ]; do
@@ -411,6 +414,11 @@ sclect_settings_install_on_main() {
         network_counter=$((network_counter + 1))
     done
     initialize_install "$download_destination/"
+    if [ "$delete_download_files" = "true" ]; then
+        rm -rf "$download_destination"
+    elif [ "$delete_download_files" != "false" ] && [ "$delete_download_files" != "true" ]; then
+        Aurora_abort "delete_download_files$ERROR_INVALID_LOCAL_VALUE" 4
+    fi
 }
 #About_the_custom_script
 ###############
