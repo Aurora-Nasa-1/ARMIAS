@@ -28,7 +28,7 @@ chmod 777 "$zips"
 cp -r "$TARGET_DIR"/* "$OUTPUT_DIR"
 echo "All files have been copied to $OUTPUT_DIR"
 tar -cf "$current_dir/output.tar" -C "$current_dir" files/
-$zstd -22 "$current_dir/output.tar.zst" "$current_dir/output.tar"
+$zstd -ultra -22 "$current_dir/output.tar.zst" "$current_dir/output.tar"
 rm "$current_dir"/output.tar
 if [ $? -eq 0 ]; then
     echo "Successfully created archive: $current_dir/output.tar.zst"
