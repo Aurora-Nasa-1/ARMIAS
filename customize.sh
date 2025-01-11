@@ -45,6 +45,32 @@ Aurora_test_input() {
         Aurora_ui_print "$1 ( $2 ) $WARN_MISSING_PARAMETERS"
     fi
 }
+print_title() {
+    if [ -n "$2" ]; then
+        Aurora_ui_print "$1 $2"
+    fi
+}
+ui_print() {
+    if [ "$1" = "- Setting permissions" ]; then
+        return
+    fi
+    if [ "$1" = "- Extracting module files" ]; then
+        return
+    fi
+    if [ "$1" = "- Current boot slot: $SLOT" ]; then
+        return
+    fi
+    if [ "$1" = "- Device is system-as-root" ]; then
+        return
+    fi
+    if [ "$(echo "$1" | grep -c '^ - Mounting ')" -gt 0 ]; then
+        return
+    fi
+    if [ "$1" = "- Done" ]; then
+        return
+    fi
+    echo "$1"
+}
 #######################################################
 version_check() {
     if [ -n "$KSU_VER_CODE" ] && [ "$KSU_VER_CODE" -lt "$ksu_min_version" ] || [ "$KSU_KERNEL_VER_CODE" -lt "$ksu_min_kernel_version" ]; then
@@ -81,18 +107,7 @@ Installer() {
         fi
     fi
     Aurora_ui_print "$MODULE_INTRO"
-    if [ "$KSU" = true ]; then
-        if [ "$KSU_VER_CODE" -le "$ksu_min_normal_version" ]; then
-            Installer_Compatibility=true
-            Aurora_ui_print "KernelSU: $WARN_FORCED_COMPATIBILITY_MODE"
-        fi
-    elif [ "$APATCH" = true ]; then
-        if [ "$APATCH_VER_CODE" -le "$apatch_min_normal_version" ]; then
-            Installer_Compatibility=true
-            Aurora_ui_print "APatch: $WARN_FORCED_COMPATIBILITY_MODE"
-        fi
-    fi
-    if [ "$Installer_Compatibility" = "false" ]; then
+    if [ "$Installer_Compatibility" = "true" ]; then
         if [ "$Installer_Log" = "false" ]; then
             Aurora_ui_print "$INSTALLER_LOG_DISABLED"
             if [ "$KSU" = true ]; then
@@ -115,7 +130,7 @@ Installer() {
                 Aurora_abort "$ERROR_UPGRADE_ROOT_SCHEME" 3
             fi
         fi
-    elif [ "$Installer_Compatibility" = "true" ]; then
+    elif [ "$Installer_Compatibility" = "false" ]; then
         Installer_Compatibility_mode "$1"
     else
         Aurora_abort "Installer_Compatibility$ERROR_INVALID_LOCAL_VALUE" 4
@@ -357,13 +372,22 @@ sclect_settings_install_on_main() {
     set_permissions_755 "$zips"
     set_permissions_755 "$zstd"
     local network_counter=1
+    if [ "$KSU" = true ]; then
+        if [ "$KSU_VER_CODE" -le "$ksu_min_normal_version" ]; then
+            Installer_Compatibility=false
+            Aurora_ui_print "KernelSU: $WARN_FORCED_COMPATIBILITY_MODE"
+        fi
+    elif [ "$APATCH" = true ]; then
+        if [ "$APATCH_VER_CODE" -le "$apatch_min_normal_version" ]; then
+            Installer_Compatibility=false
+            Aurora_ui_print "APatch: $WARN_FORCED_COMPATIBILITY_MODE"
+        fi
+    fi
     if [ -f "$MODPATH"/output.tar.zst ]; then
         un_zstd_tar "$MODPATH/output.tar.zst" "$MODPATH/files/"
         rm "$MODPATH/output.tar.zst"
     fi
-    if [ "$install" = "false" ]; then
-        return
-    elif [ "$install" = "true" ]; then
+    if [ "$install" = "true" ]; then
         initialize_install "$MODPATH/$ZIPLIST"
     else
         Aurora_abort "install$ERROR_INVALID_LOCAL_VALUE" 4
@@ -442,11 +466,18 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
-    if [ "$APATCH" != true ]; then
-        rm -rf "$INSTALLER_MODPATH"
-        cp "$INSTALLER_MODPATH/module.prop" "/data/adb/modules/AuroraNasaInstaller/module.prop"
-    fi
-    find "$INSTALLER_MODPATH" ! -name "module.prop" -exec rm -rf {} \;
+    cat <<'EOF' >/data/local/tmp/other.sh
+#!/system/bin/sh
+sleep 4
+rm -rf /data/adb/modules/AuroraNasa_Installer
+rm -rf /data/adb/modules_update/AuroraNasa_Installer
+(
+    sleep 1
+    rm -f "$0"
+) &
+EOF
+    chmod +x /data/local/tmp/other.sh
+    nohup sh /data/local/tmp/other.sh &
 }
 ##########################################################
 main
