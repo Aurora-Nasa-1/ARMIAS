@@ -6,6 +6,8 @@
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
 main() {
+    mkdir -p "$MODPATH/TEMP"
+    tempdir="$MODPATH/TEMP"
     INSTALLER_MODPATH="$MODPATH"
     if [ ! -f "$MODPATH/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
@@ -136,13 +138,13 @@ Installer() {
         Aurora_abort "Installer_Compatibility$ERROR_INVALID_LOCAL_VALUE" 4
     fi
     if [ "$fix_ksu_install" = "true" ] && [ "$KSU" = true ] && [ -z "$KSU_step_skip" ]; then
-        temp_dir="$MODPATH/TEMP/KSU"
+        temp_dir="$tempdir/KSU"
         mkdir -p "$temp_dir"
         unzip -d "$temp_dir" "$1" >/dev/null 2>&1
         KSU_Installer_TEMP_ID=$(awk -F= '/^id=/ {print $2}' "$temp_dir/module.prop")
-        $zip7z a -r "$MODPATH/TEMP/KSU/temp.zip" "$SECURE_DIR/modules_update/$KSU_Installer_TEMP_ID"/* >/dev/null 2>&1
+        $zip7z a -r "$tempdir/KSU/temp.zip" "$SECURE_DIR/modules_update/$KSU_Installer_TEMP_ID"/* >/dev/null 2>&1
         KSU_step_skip=true
-        Installer "$MODPATH/TEMP/KSU/temp.zip" KSU
+        Installer "$tempdir/KSU/temp.zip" KSU
         rm -rf "$temp_dir"
         KSU_step_skip=""
     fi
@@ -150,8 +152,7 @@ Installer() {
 }
 initialize_install() {
     local dir="$1"
-    mkdir -p "$MODPATH/TEMP/TEMP"
-    local temp_all_files="$MODPATH/TEMP/listTMP.txt"
+    local temp_all_files="$tempdir/listTMP"
 
     if [ ! -d "$dir" ]; then
         Aurora_ui_print "$WARN_ZIPPATH_NOT_FOUND $dir"
@@ -306,11 +307,11 @@ github_get_url() {
     local owner_repo="$1"
     local SEARCH_CHAR="$2"
     local API_URL="https://api.github.com/repos/${owner_repo}/releases/latest"
-    local wget_response_file=$(mktemp)
+    local wget_response_file="$tempdir/github_get_url_response"
 
     wget -S --output-document="$wget_response_file" "$API_URL"
 
-    local TEMP_FILE=$(mktemp)
+    local TEMP_FILE="$tempdir/github_get_url"
 
     $jq -r '.assets[] | select(.name | test("'"$SEARCH_CHAR"'")) | .browser_download_url' "$wget_response_file" >"$TEMP_FILE"
     if [ $? -ne 0 ]; then
