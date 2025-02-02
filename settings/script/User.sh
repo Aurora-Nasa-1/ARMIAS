@@ -22,9 +22,9 @@ zip_if() {
     if [ -f "$1" ]; then
         return_code="$1"
         if [ "$return_code" -eq 0 ]; then
-            echo "${USER_SUCCESSFULLY_COMPRESS}: $2"
+            echo "- ${USER_SUCCESSFULLY_COMPRESS}: $2"
         else
-            abort "${USER_FAILED_COMPRESS}: $2"
+            abort "- ${USER_FAILED_COMPRESS}: $2"
         fi
     fi
 }
@@ -62,9 +62,9 @@ main() {
 main
 print_KEY_title "$USER_KEY_BACKUPMODULE" "$USER_NOT_BACKUPMODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
-    print_KEY_title "$USER_KEY_BACKUPMODULE(Zip)" "$USER_KEY_BACKUPMODULE($USER_CHOOSE_ZSTD)"
+    print_KEY_title "$USER_KEY_BACKUPMODULE(Zip)" "${USER_KEY_BACKUPMODULE}Plus ($USER_CHOOSE_ZSTD)"
     if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
-        echo "$USER_START_ZIP"
+        echo "- $USER_START_ZIP"
         for DIR in "/data/adb/modules/"*/; do
             DIR_NAME=$(basename "$DIR")
             OUTPUT_FILE="$MODPATH/files/modules/${DIR_NAME}.zip"
@@ -88,6 +88,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"* -xr!"$MODPATH/files/*" >"/dev/null" 2>&1
     zip_if "$?" "ARMIAS.zip"
 else
+    echo "- $USER_START_COMPRESS"
     $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "$?" "ARMIAS.zip"
 fi
@@ -98,4 +99,4 @@ fi
 rm -rf /data/local/tmp/settings/
 rm -rf /data/local/tmp/prebuilts.tar.xz
 rm -rf /data/local/tmp/prebuilts/
-exit 0
+abort "- Done"
