@@ -31,24 +31,24 @@ zip_if() {
 main() {
     MODPATH=$(cat data/local/tmp/clickinformation.txt)
     rm -rf data/local/tmp/clickinformation.txt
-    if [ ! -f "$MODPATH/settings/settings.sh" ]; then
+    if [ ! -f "/data/local/tmp/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
     else
         # shellcheck source=/dev/null
-        . "$MODPATH/settings/settings.sh"
+        . "/data/local/tmp/settings/settings.sh"
     fi
-    if [ ! -f "$MODPATH/$langpath" ]; then
+    if [ ! -f "/data/local/tmp/$langpath" ]; then
         abort "Notfound File!!!($langpath)"
     else
         # shellcheck disable=SC1090
-        . "$MODPATH/$langpath"
+        . "/data/local/tmp/$langpath"
         eval "lang_$print_languages"
     fi
-    if [ ! -f "$MODPATH/$script_path" ]; then
+    if [ ! -f "/data/local/tmp/$script_path" ]; then
         abort "Notfound File!!!($script_path)"
     else
         # shellcheck disable=SC1090
-        . "$MODPATH/$script_path"
+        . "/data/local/tmp/$script_path"
     fi
     if [ -f "$MODPATH/prebuilts.tar.xz" ]; then
         mkdir -p "$MODPATH/prebuilts"
@@ -67,7 +67,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
         for DIR in "/data/adb/modules/"*/; do
             DIR_NAME=$(basename "$DIR")
             echo "Processing directory: $DIR_NAME"
-            OUTPUT_FILE="$MODDIR/files/modules/${DIR_NAME}.zip"
+            OUTPUT_FILE="$MODPATH/files/modules/${DIR_NAME}.zip"
             $zips a -r "$OUTPUT_FILE" "$DIR*"
             zip_if "$?" "${DIR_NAME}.zip"
         done

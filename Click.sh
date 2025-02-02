@@ -45,4 +45,6 @@ ASH_STANDALONE=1
 MODPATH=${0%/*}
 FILE=/data/local/tmp/clickinformation.txt
 echo $MODPATH >$FILE
-$BUSYBOX_PATH sh "$MODPATH"/User.sh
+cp -r $MODPATH/settings/ /data/local/tmp/
+chmod -R 755 /data/local/tmp/settings/
+$BUSYBOX_PATH sh /data/local/tmp/settings/script/User.sh
