@@ -13,7 +13,7 @@ print_KEY_title() {
     echo ""
     echo "******************************************"
     echo "         ${KEY_VOLUME}+$1"
-    echo "         ${KEY_VOLUME}+$2"
+    echo "         ${KEY_VOLUME}-$2"
     echo "******************************************"
     echo ""
     key_select
@@ -22,9 +22,9 @@ zip_if() {
     if [ -f "$1" ]; then
         return_code="$1"
         if [ "$return_code" -eq 0 ]; then
-            echo "Successfully created archive: $2"
+            echo "${USER_SUCCESSFULLY_COMPRESS}: $2"
         else
-            abort "Failed to create archive for directory: $2"
+            abort "${USER_FAILED_COMPRESS}: $2"
         fi
     fi
 }
@@ -60,26 +60,26 @@ main() {
     fi
 }
 main
-print_KEY_title "备份现有模块" "不备份"
+print_KEY_title "$USER_KEY_BACKUPMODULE" "$USER_NOT_BACKUPMODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
-    print_KEY_title "备份现有模块(Zip)" "备份现有模块(文件夹) (配合Zstd使用)"
+    print_KEY_title "$USER_KEY_BACKUPMODULE(Zip)" "$USER_KEY_BACKUPMODULE($USER_CHOOSE_ZSTD)"
     if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
+        echo "$USER_START_ZIP"
         for DIR in "/data/adb/modules/"*/; do
             DIR_NAME=$(basename "$DIR")
-            echo "Processing directory: $DIR_NAME"
             OUTPUT_FILE="$MODPATH/files/modules/${DIR_NAME}.zip"
             $zips a -r "$OUTPUT_FILE" "$DIR*" >/dev/null 2>&1
-            zip_if "$?" "${DIR_NAME}.zip"
         done
+        echo "- $USER_ZIPPED $MODPATH/files/modules"
     else
+        echo "- $USER_START_COPY_FILE"
         cp -r "/data/adb/modules"/* "$MODPATH/files/modules" >/dev/null 2>&1
-        echo "All files have been copied to $MODPATH/files/modules"
+        echo "- $USER_END_COPY_FILE $MODPATH/files/modules"
     fi
-else
-    echo 1
 fi
-print_KEY_title "打包模块(Zstd)(慢)" "打包模块"
+print_KEY_title "$USER_PACK_MODULE_ZSTD" "$USER_PACK_MODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
+    echo "- $USER_START_COMPRESS"
     tar -cf "$MODPATH/output.tar" -C "$MODPATH" files/
     zip_if "$?" "output.tar"
     $zstd -ultra -22 "$MODPATH/output.tar.zst" "$MODPATH/output.tar" >/dev/null 2>&1
