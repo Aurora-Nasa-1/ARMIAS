@@ -29,7 +29,7 @@ zip_if() {
     fi
 }
 main() {
-    MODPATH=$(cat data/local/tmp/clickinformation.txt)
+    MODPATH=$(cat /data/local/tmp/clickinformation.txt)
     rm -rf data/local/tmp/clickinformation.txt
     if [ ! -f "/data/local/tmp/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
@@ -50,9 +50,8 @@ main() {
         # shellcheck disable=SC1090
         . "/data/local/tmp/$script_path"
     fi
-    if [ -f "$MODPATH/prebuilts.tar.xz" ]; then
-        mkdir -p "$MODPATH/prebuilts"
-        tar -xJf "$MODPATH/prebuilts.tar.xz" -C "/data/local/tmp/"
+    if [ -f "/data/local/tmp/prebuilts.tar.xz" ]; then
+        tar -xJf "/data/local/tmp/prebuilts.tar.xz" -C "/data/local/tmp/"
         zstd="/data/local/tmp/zstd"
         zips="/data/local/tmp/7zzs"
         set_permissions_755 "$zips"
