@@ -52,8 +52,8 @@ main() {
     fi
     if [ -f "/data/local/tmp/prebuilts.tar.xz" ]; then
         tar -xJf "/data/local/tmp/prebuilts.tar.xz" -C "/data/local/tmp/"
-        zstd="/data/local/tmp/zstd"
-        zips="/data/local/tmp/7zzs"
+        zstd="/data/local/tmp/prebuilts/zstd"
+        zips="/data/local/tmp/prebuilts/7zzs"
         chmod 755 "$zips"
         chmod 755 "$zstd"
     fi
@@ -96,7 +96,5 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
 fi
 rm -rf /data/local/tmp/settings/
 rm -rf /data/local/tmp/prebuilts.tar.xz
-rm -rf /data/local/tmp/zstd
-rm -rf /data/local/tmp/7zzs
-rm -rf /data/local/tmp/jq
+rm -rf /data/local/tmp/prebuilts/
 exit 0
