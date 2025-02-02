@@ -54,8 +54,8 @@ main() {
         tar -xJf "/data/local/tmp/prebuilts.tar.xz" -C "/data/local/tmp/"
         zstd="/data/local/tmp/zstd"
         zips="/data/local/tmp/7zzs"
-        set_permissions_755 "$zips"
-        set_permissions_755 "$zstd"
+        chmod 755 "$zips"
+        chmod 755 "$zstd"
     fi
 }
 main
