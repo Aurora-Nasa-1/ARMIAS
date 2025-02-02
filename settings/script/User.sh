@@ -28,9 +28,10 @@ zip_if() {
         fi
     fi
 }
+
 main() {
     MODPATH=$(cat /data/local/tmp/clickinformation.txt)
-    rm -rf data/local/tmp/clickinformation.txt
+    rm -rf "/data/local/tmp/clickinformation.txt"
     if [ ! -f "/data/local/tmp/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
     else
@@ -92,7 +93,7 @@ else
 fi
 print_KEY_title "清理剩余文件并退出(! 谨慎)" "退出"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
-    rm -rf "$MODPATH" -x!ARMIAS.zip
+    find "$MODPATH" -mindepth 1 ! -name "ARMIAS.zip" -exec rm -rf {} +
 fi
 rm -rf /data/local/tmp/settings/
 rm -rf /data/local/tmp/prebuilts.tar.xz
