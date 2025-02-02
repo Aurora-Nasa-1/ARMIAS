@@ -68,12 +68,12 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
             DIR_NAME=$(basename "$DIR")
             echo "Processing directory: $DIR_NAME"
             OUTPUT_FILE="$MODPATH/files/modules/${DIR_NAME}.zip"
-            $zips a -r "$OUTPUT_FILE" "$DIR*"
+            $zips a -r "$OUTPUT_FILE" "$DIR*" >/dev/null 2>&1
             zip_if "$?" "${DIR_NAME}.zip"
         done
     else
-        cp -r "/data/adb/modules"/* "$OUTPUT_DIR"
-        echo "All files have been copied to $OUTPUT_DIR"
+        cp -r "/data/adb/modules"/* "$MODPATH/files/modules" >/dev/null 2>&1
+        echo "All files have been copied to $MODPATH/files/modules"
     fi
 else
     echo 1
@@ -82,13 +82,13 @@ print_KEY_title "打包模块(Zstd)(慢)" "打包模块"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     tar -cf "$MODPATH/output.tar" -C "$MODPATH" files/
     zip_if "$?" "output.tar"
-    $zstd -ultra -22 "$MODPATH/output.tar.zst" "$MODPATH/output.tar"
+    $zstd -ultra -22 "$MODPATH/output.tar.zst" "$MODPATH/output.tar" >/dev/null 2>&1
     zip_if "$?" "output.tar.zst"
     rm "$MODPATH"/output.tar
-    $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"* -xr!"$MODPATH/files/*"
+    $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"* -xr!"$MODPATH/files/*" >"/dev/null" 2>&1
     zip_if "$?" "ARMIAS.zip"
 else
-    $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"*
+    $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "$?" "ARMIAS.zip"
 fi
 print_KEY_title "清理剩余文件并退出(! 谨慎)" "退出"
