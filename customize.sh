@@ -295,8 +295,8 @@ CustomShell() {
 ClearEnv() {
     FILE1="/data/local/tmp/remove.sh"
     FILE2="/data/local/tmp/remove"
-    echo "rm -rf /data/adb/modules/AuroraNasa_Installer/" >"$FILE1"
-    echo "rm -rf /data/adb/module_update/AuroraNasa_Installer/" >>"$FILE1"
+    echo "rm -rf /data/adb/modules/$MODID/" >"$FILE1"
+    echo "rm -rf /data/adb/module_update/$MODID/" >>"$FILE1"
     echo "rm -f /data/local/tmp/remove.sh" >>"$FILE1"
     echo "rm -f /data/local/tmp/remove" >>"$FILE1"
     echo "* * * * * /data/local/tmp/remove.sh" >"$FILE2"
@@ -304,5 +304,7 @@ ClearEnv() {
 
 }
 ##########################################################
-main
+if [ -n "$MODID" ]; then
+    main
+fi
 Aurora_ui_print "$END"
