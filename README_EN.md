@@ -4,89 +4,55 @@
 
 ## Introduction
 
-This module aims to provide a highly customizable automatic installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
+This module aims to provide a highly customizable automated installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
 
 ## Basic Operations
 
-### 1. Preparation
+### 1. Batch Module Installation
 
-- Simply place all modules (zip files) into the `./files/modules` folder.
-  **Note**: Please ensure that file names **do not contain special characters**.
+- Place all the modules (zip files) you want to install into the `./files/modules` folder.
+
+### 2. Backup Modules / Automatically Package This Module
+
 - Unzip this module's zip folder.
-
-### 2. Backup All Modules
-
-- Run `backup_all_modules_zip.sh` to back up all modules.
-
-### 3. Package the Module
-
-- Run `Make_module.sh` to package this module. (and compress all files using zstd)
+- Run the `Click.sh` script with `SU` permissions to choose to backup modules and package this module. It includes various built-in features.
 
 ## Advanced Features (Optional Reading)
 
-### Backup and Compression (High Compression Ratio)
+### One-Click Overwrite for DATA and SDCARD
 
-- Run `backup_modules_zstd_all_files.sh` to back up modules (folders) and compress all module files using zstd. This script will also automatically compress this module.
-
-### One-Click DATA and SDCARD Overwrite
-
-- Considering that some modules generate configuration files in the data/ or android folders after installation, this module provides a one-click function to batch copy target files within the module to data/ or sdcard/, facilitating module configuration and usage.
-- At the same time, it also supports direct modification of `data` and `sdcard`.
-  **Note**: This operation will copy all files under "target directory within the module/*". Please ensure that the correct folder structure is set up and **permissions are set correctly**.
-  Example of directories within the module: `./files/patches/sdcard/`, `./files/patches/data/`, `./files/patches/apks/`
-
-### Automatic Batch Installation of APKs `(su)`
-
-- A simple and straightforward feature that allows you to install multiple APKs in batch.
+- Since some modules generate configuration files in the `/data/` or `Android` folders after installation, this module provides a one-click feature to batch copy target files within the module to `/data/` or `/sdcard/` for easier configuration and usage.
+- It also supports directly modifying `data` and `sdcard`.
+  **Note**: This operation will overwrite all files in the target directory. Please ensure the correct folder structure and **set permissions correctly**.
+  Example directories within the module: `./files/patches/sdcard/`, `./files/patches/data/`, `./files/patches/apks/`
+- APK files in `./files/patches/apks/` will be installed in batch.
 
 ### Download Files from the Internet
 
-- Supports fetching the latest specific release file from a GitHub repository.
+- Supports fetching the latest specific release files from a GitHub repository. (Beta)
 - Supports batch downloading of files.
-- Supports batch downloading and installation of modules.
+- Supports batch downloading and installing of modules.
 
 ### Post-Installation Module Patching
 
-- Files in the `./files/patches/modules/` directory will be copied to `data/adb/modules_update/`.
-  Please create a folder with the same ID as the installed module in the `./files/patches/modules/` directory and place the necessary patch files in it.
+- Copy files from the `./files/patches/modules/` directory to `data/adb/modules_update/`.
+  Please create a folder with the same module ID as the installed module in the `./files/patches/modules/` directory and place the patch files in that folder.
 
 ### Configuration File: settings.sh
 
-- Supports modifying 80% of the module's path variables, language, disabling logs, setting the minimum Android API, Magisk version, ksu version, apatch version, and custom scripts.
-  **If you encounter installation issues, please try enabling** Compatibility Mode **.**
+- Supports modifying module path variables, language, disabling logs, setting minimum Android API, Magisk version, ksu version, apatch version, and custom scripts.
 
-### Language File
+### Language File: languages.ini
 
-- Default path: `languages.ini`
 - Supports modifying the language file.
 
-### Advanced Feature: Custom Installation Templates
+### Advanced Feature: Custom Installation Template
 
 - See comments for details.
 
 ## Compatibility
 
-- Compatible with Magisk, KernelSU, and APatch.
-- Supports installing Magisk modules in TWRP.
-
-## User Guide
-
-### 1. Preparation
-
-- Place modules (zip files) into the `./files/modules` folder.
-- Organize other files into corresponding subfolders within the `./files/patches` folder.
-
-### 2. Backup All Modules
-
-- Run `backup_all_modules_zip.sh` to back up all modules.
-
-### 3. Package the Module
-
-- Run `Make_module.sh` to package this module.
-
-## Important Note
-
-- **Please do not include special characters in file names.**
+- Compatible with Magisk, KernelSU, APatch.
 
 ## Thanks
 
