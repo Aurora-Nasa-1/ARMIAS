@@ -43,7 +43,7 @@ jobs:
 
       - name: Delete contents of prebuilts folder
         run: |
-          rm -rf prebuilts/*
+          rm -rf prebuilts
 
       - name: Compress repository for each language version
         run: |

@@ -218,7 +218,7 @@ patches_install() {
         apk_found=0
         for apk_file in "$MODPATH/$PATCHAPK"/*; do
             if [ -f "$apk_file" ] && echo "$apk_file" | grep -iqE '\.apk$'; then
-                install_output=$(pm install "$apk_file" 2>&1)
+                install_output=$(pm install "$apk_file")
                 if echo "$install_output" | grep -iq "Success"; then
                     Aurora_ui_print "$apk_file $INSTALL_SUCCESS"
                     apk_found=1
