@@ -44,7 +44,7 @@ detect_environment
 ASH_STANDALONE=1
 MODPATH=${0%/*}
 FILE=/data/local/tmp/clickinformation.txt
-echo $MODPATH >$FILE
+echo $MODPATH > $FILE
 cp -r $MODPATH/settings/ /data/local/tmp/
 cp $MODPATH/prebuilts.tar.xz /data/local/tmp/
 chmod -R 755 /data/local/tmp/settings/
