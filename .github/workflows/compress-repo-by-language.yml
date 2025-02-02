@@ -50,7 +50,7 @@ jobs:
           LATEST_TAG=$(cat latest_tag.txt)
           CURRENT_TIME=$(cat current_time.txt)
           languages=("en" "jp" "zh")
-          . ./languages.ini
+          . ./settings/languages.ini
           for lang in "${languages[@]}"; do
             find languages -maxdepth 1 -mindepth 1 -type d ! -name "$lang" -exec rm -rf {} +
             rm -f README.md README_*.md

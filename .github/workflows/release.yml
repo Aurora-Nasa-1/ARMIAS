@@ -47,7 +47,7 @@ jobs:
           LATEST_TAG=$(git describe --tags --abbrev=0)
           CURRENT_TIME=$(cat current_time.txt)
           languages=("en" "jp" "zh")
-          . ./languages.ini
+          . ./settings/languages.ini
           for lang in "${languages[@]}"; do
             # 清理不必要的文件和目录
             find languages -maxdepth 1 -mindepth 1 -type d ! -name "$lang" -exec rm -rf {} +
