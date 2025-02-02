@@ -90,3 +90,13 @@ else
     $zips a "$MODPATH"/ARMIAS.zip "$MODPATH/"*
     zip_if "$?" "ARMIAS.zip"
 fi
+print_KEY_title "清理剩余文件并退出(! 谨慎)" "退出"
+if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
+    rm -rf "$MODPATH" -x!ARMIAS.zip
+fi
+rm -rf /data/local/tmp/settings/
+rm -rf /data/local/tmp/prebuilts.tar.xz
+rm -rf /data/local/tmp/zstd
+rm -rf /data/local/tmp/7zzs
+rm -rf /data/local/tmp/jq
+exit 0
