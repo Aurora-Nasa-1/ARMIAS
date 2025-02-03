@@ -23,9 +23,7 @@ print_KEY_title() {
 }
 zip_if() {
     if [ -z "$1" ]; then
-        echo "- ${USER_SUCCESSFULLY_COMPRESS}: $2"
-    else
-        abort "- ${USER_FAILED_COMPRESS}: $2"
+        echo "- ${USER_SUCCESSFULLY_COMPRESS}: $1"
     fi
 }
 
@@ -79,22 +77,22 @@ print_KEY_title "$USER_PACK_MODULE_ZSTD" "$USER_PACK_MODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     echo "- $USER_START_COMPRESS"
     tar -cf "$NOW_PATH/output.tar" -C "$NOW_PATH" files/ >/dev/null 2>&1
-    zip_if "$?" "output.tar"
+    zip_if "output.tar"
     $zstd -19 "$NOW_PATH/output.tar.zst" "$NOW_PATH/output.tar" >/dev/null 2>&1
-    zip_if "$?" "output.tar.zst"
+    zip_if "output.tar.zst"
     rm "$NOW_PATH"/output.tar
     cp "$NOW_PATH/output.tar.zst" "$MODPATH/output.tar.zst"
     rm -rf "$MODPATH/files/"
     $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* -xr!"$MODPATH/files/" >"/dev/null" 2>&1
-    zip_if "$?" "ARMIAS.zip"
+    zip_if "ARMIAS.zip"
     rm "$NOW_PATH/output.tar.zst"
 else
     echo "- $USER_START_COMPRESS"
     cp -r "$NOW_PATH/files" "$MODPATH/" >"/dev/null" 2>&1
     $zips a -r "$MODPATH"/ARMIAS.zip "$NOW_PATH/"* >"/dev/null" 2>&1
-    zip_if "$?" "ARMIAS.zip"
+    zip_if "ARMIAS.zip"
 fi
-cp -r "$NOW_PATH/files/" "$MODPATH/"
+cp -r "$NOW_PATH/files/" "$MODPATH/" >"/dev/null" 2>&1
 echo "- $USER_END_COPY_FILE $MODPATH/files/"
 print_KEY_title "$USER_CLEAN_REMAINING_EXIT" "$EXIT"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
