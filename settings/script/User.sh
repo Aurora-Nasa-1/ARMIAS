@@ -22,9 +22,7 @@ print_KEY_title() {
     key_select
 }
 zip_if() {
-    if [ -z "$1" ]; then
-        echo "- ${USER_SUCCESSFULLY_COMPRESS}: $1"
-    fi
+    echo "- ${USER_SUCCESSFULLY_COMPRESS}: $1"
 }
 
 main() {
