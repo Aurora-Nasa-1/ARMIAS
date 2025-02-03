@@ -97,9 +97,9 @@ print_KEY_title "$USER_CLEAN_REMAINING_EXIT" "$EXIT"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     find "$MODPATH" -mindepth 1 ! -name "ARMIAS.zip" -exec rm -rf {} +
 fi
-rm -rf $NOW_PATH/files/
-rm -rf $NOW_PATH/settings/
-rm -rf $NOW_PATH/prebuilts.tar.xz
-rm -rf $NOW_PATH/prebuilts/
+rm -rf "$NOW_PATH"/files/
+rm -rf "$NOW_PATH"/settings/
+rm -rf "$NOW_PATH"/prebuilts.tar.xz
+rm -rf "$NOW_PATH"/prebuilts/
 echo "- Done"
 exit 0
