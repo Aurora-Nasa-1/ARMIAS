@@ -42,9 +42,9 @@ detect_environment() {
 }
 detect_environment
 MODPATH=${0%/*}
-FILE=/data/local/tmp/clickinformation.txt
-echo $MODPATH > $FILE
-cp -r $MODPATH/settings/ /data/local/tmp/
-cp $MODPATH/prebuilts.tar.xz /data/local/tmp/
-chmod -R 755 /data/local/tmp/settings/
-ASH_STANDALONE=1 $BUSYBOX_PATH sh /data/local/tmp/settings/script/User.sh
+NOW_PATH="/data/local/tmp"
+cp -r "$MODPATH"/files/ "$NOW_PATH"/
+cp -r "$MODPATH"/settings/ "$NOW_PATH"/
+cp "$MODPATH"/prebuilts.tar.xz "$NOW_PATH"/
+chmod -R 755 "$NOW_PATH"/settings/
+ASH_STANDALONE=1 $BUSYBOX_PATH sh /data/local/tmp/settings/script/User.sh "$MODPATH" "$NOW_PATH"
