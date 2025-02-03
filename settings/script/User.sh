@@ -6,7 +6,8 @@
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
 # shellcheck disable=SC2164
-NOW_PATH="/data/local/tmp"
+MODPATH="$1"
+NOW_PATH="$2"
 abort() {
     echo "$1"
     exit 1
@@ -32,8 +33,6 @@ zip_if() {
 }
 
 main() {
-    MODPATH=$(cat /data/local/tmp/clickinformation.txt)
-    rm -rf "/data/local/tmp/clickinformation.txt"
     if [ ! -f "$NOW_PATH/settings/settings.sh" ]; then
         abort "Notfound File!!!(settings.sh)"
     else
