@@ -87,7 +87,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
 else
     echo "- $USER_START_COMPRESS"
     cp -r "$NOW_PATH/files" "$MODPATH/" >"/dev/null" 2>&1
-    $zips a -r "$MODPATH"/ARMIAS.zip "$NOW_PATH/"* >"/dev/null" 2>&1
+    $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "ARMIAS.zip"
 fi
 cp -r "$NOW_PATH/files/" "$MODPATH/" >"/dev/null" 2>&1
