@@ -47,4 +47,4 @@ cp -r "$MODPATH"/files/ "$NOW_PATH"/
 cp -r "$MODPATH"/settings/ "$NOW_PATH"/
 cp "$MODPATH"/prebuilts.tar.xz "$NOW_PATH"/
 chmod -R 755 "$NOW_PATH"/settings/
-ASH_STANDALONE=1 $BUSYBOX_PATH sh /data/local/tmp/settings/script/User.sh "$MODPATH" "$NOW_PATH"
+ASH_STANDALONE=1 $BUSYBOX_PATH sh "$NOW_PATH"/settings/script/User.sh "$MODPATH" "$NOW_PATH"
