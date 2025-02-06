@@ -231,15 +231,17 @@ key_installer_once() {
 ##############
 sclect_settings_install_on_main() {
     local network_counter=1
-    if [ "$KSU" = true ]; then
-        if [ "$KSU_VER_CODE" -le "$ksu_min_normal_version" ]; then
-            Installer_Compatibility=false
-            Aurora_ui_print "KernelSU: $WARN_FORCED_COMPATIBILITY_MODE"
-        fi
-    elif [ "$APATCH" = true ]; then
-        if [ "$APATCH_VER_CODE" -le "$apatch_min_normal_version" ]; then
-            Installer_Compatibility=false
-            Aurora_ui_print "APatch: $WARN_FORCED_COMPATIBILITY_MODE"
+    if [ "$Installer_Compatibility" = "true" ]; then
+        if [ "$KSU" = true ]; then
+            if [ "$KSU_VER_CODE" -le "$ksu_min_normal_version" ]; then
+                Installer_Compatibility=false
+                Aurora_ui_print "KernelSU: $WARN_FORCED_COMPATIBILITY_MODE"
+            fi
+        elif [ "$APATCH" = true ]; then
+            if [ "$APATCH_VER_CODE" -le "$apatch_min_normal_version" ]; then
+                Installer_Compatibility=false
+                Aurora_ui_print "APatch: $WARN_FORCED_COMPATIBILITY_MODE"
+            fi
         fi
     fi
     if [ -f "$MODPATH"/output.tar.zst ]; then
