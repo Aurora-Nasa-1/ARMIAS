@@ -8,6 +8,7 @@
 # shellcheck disable=SC2164
 MODPATH="$1"
 NOW_PATH="$2"
+VERSION="$3"
 abort() {
     echo "$1"
     exit 1
@@ -54,9 +55,22 @@ main() {
     fi
 }
 main
+echo "- $USER_START"
+ZIP_DIR="$NOW_PATH/files/modules/"
+if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
+    echo "- $USER_FOUND_ZIP"
+    print_KEY_title "$USER_KEY_UNZIP_MODULES" "$USER_NOT_UNZIP_MODULES"
+    if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
+        for zip_file in "$ZIP_DIR"*.zip; do
+            zip_name=$(basename "$zip_file" .zip)
+            unzip "$zip_file" -d "$NOW_PATH/files/modules/$zip_name/" >/dev/null 2>&1
+            rm "$zip_file"
+        done
+    fi
+fi
 print_KEY_title "$USER_KEY_BACKUPMODULE" "$USER_NOT_BACKUPMODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
-    print_KEY_title "$USER_KEY_BACKUPMODULE(Zip)" "${USER_KEY_BACKUPMODULE}Zstd ($USER_CHOOSE_ZSTD)"
+    print_KEY_title "$USER_KEY_BACKUPMODULE(Zip)" "${USER_KEY_BACKUPMODULE} ($USER_CHOOSE_ZSTD)"
     if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
         echo "- $USER_START_ZIP"
         for DIR in "/data/adb/modules/"*/; do
