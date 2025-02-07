@@ -295,13 +295,14 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
+    mkdir -p "/data/local/tmp/${MODID}_ClearEnv"
     FILE1="/data/local/tmp/remove.sh"
-    FILE2="/data/local/tmp/Kill_ClearEnv/root"
+    FILE2="/data/local/tmp/${MODID}_ClearEnv/root"
     echo "sleep 3" >"$FILE1"
     echo "rm -rf /data/adb/modules/$MODID/" >>"$FILE1"
     echo "rm -rf /data/adb/modules_update/$MODID/" >>"$FILE1"
     echo "rm -f /data/local/tmp/remove.sh" >>"$FILE1"
-    echo "rm -f /data/local/tmp/Kill_ClearEnv/root" >>"$FILE1"
+    echo "rm -f /data/local/tmp/${MODID}_ClearEnv/root" >>"$FILE1"
     echo "* * * * * sh /data/local/tmp/remove.sh" >"$FILE2"
     chmod +x "$FILE1"
     chmod +x "$FILE2"
