@@ -8,7 +8,6 @@
 # shellcheck disable=SC2164
 MODPATH="$1"
 NOW_PATH="$2"
-VERSION="$3"
 abort() {
     echo "$1"
     exit 1
@@ -56,6 +55,7 @@ main() {
 }
 main
 echo "$USER_START"
+echo ""
 ZIP_DIR="$NOW_PATH/files/modules/"
 if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
     echo "- $USER_FOUND_ZIP"
@@ -93,6 +93,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     $zstd -19 "$NOW_PATH/output.tar.zst" "$NOW_PATH/output.tar" >/dev/null 2>&1
     zip_if "output.tar.zst"
     rm "$NOW_PATH"/output.tar
+    rm -rf "$MODPATH"/files/
     cp "$NOW_PATH/output.tar.zst" "$MODPATH/output.tar.zst"
     rm -rf "$MODPATH/files/"
     $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* -xr!"$MODPATH/files/" >"/dev/null" 2>&1
@@ -100,6 +101,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     rm "$NOW_PATH/output.tar.zst"
 else
     echo "- $USER_START_COMPRESS"
+    rm -rf "$MODPATH"/files/
     cp -r "$NOW_PATH/files" "$MODPATH/" >"/dev/null" 2>&1
     $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "ARMIAS.zip"
