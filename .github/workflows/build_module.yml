@@ -28,8 +28,9 @@ jobs:
 
       - name: Get current time
         run: |
-          CURRENT_TIME=$(date +"%Y%m%d%H%M")
-          echo "$CURRENT_TIME" > current_time.txt 
+          random_number=$((RANDOM % 100))
+          timestamp_with_random="$(date +'%Y%m%d')${random_number}"
+          echo "$timestamp_with_random" > current_time.txt
           
       - name: Get latest tag
         id: latest-tag
