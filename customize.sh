@@ -251,8 +251,6 @@ sclect_settings_install_on_main() {
     fi
     if [ "$install" = "true" ]; then
         initialize_install "$MODPATH/$ZIPLIST"
-    else
-        Aurora_abort "install$ERROR_INVALID_LOCAL_VALUE" 4
     fi
     if [ "$Download_before_install" = "false" ]; then
         return
