@@ -6,6 +6,7 @@
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
 main() {
+    MODIDBACKUP="$MODID"
     mkdir -p "$MODPATH/TEMP"
     tempdir="$MODPATH/TEMP"
     INSTALLER_MODPATH="$MODPATH"
@@ -295,6 +296,7 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
+    MODID="$MODIDBACKUP"
     FILE1="/data/local/tmp/remove.sh"
     FILE2="/data/local/tmp/${MODID}_ClearEnv/root"
     echo "sleep 3" >"$FILE1"
