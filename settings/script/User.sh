@@ -54,7 +54,7 @@ main() {
     fi
 }
 main
-echo -e "\033[32mG$USER_START\033[0m"
+echo -e "\033[32m$USER_START\033[0m"
 echo ""
 ZIP_DIR="$NOW_PATH/files/modules/"
 if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
@@ -66,6 +66,7 @@ if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
             unzip "$zip_file" -d "$NOW_PATH/files/modules/$zip_name/" >/dev/null 2>&1
             rm "$zip_file"
         done
+        echo "- $UNZIP_FINNSH"
     fi
 fi
 print_KEY_title "$USER_KEY_BACKUPMODULE" "$USER_NOT_BACKUPMODULE"
