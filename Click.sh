@@ -42,8 +42,9 @@ detect_environment() {
 }
 detect_environment
 MODPATH=${0%/*}
-VERSION=$(grep "version" "$MODPATH/module.prop" | awk -F'=' '{print $2}')
+VERSION=$(grep "version" "$MODPATH/module.prop" | awk -F'=' '{print $2}' | awk 'NR==1')
 echo "Module Version: $VERSION"
+echo ""
 NOW_PATH="/data/local/tmp"
 cp -r "$MODPATH"/files/ "$NOW_PATH"/
 cp -r "$MODPATH"/settings/ "$NOW_PATH"/
