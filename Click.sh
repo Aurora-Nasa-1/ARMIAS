@@ -42,9 +42,10 @@ detect_environment() {
 }
 detect_environment
 MODPATH=${0%/*}
+VERSION=$(grep "version" "$MODPATH/module.prop" | awk -F'=' '{print $2}')
 NOW_PATH="/data/local/tmp"
 cp -r "$MODPATH"/files/ "$NOW_PATH"/
 cp -r "$MODPATH"/settings/ "$NOW_PATH"/
 cp "$MODPATH"/prebuilts.tar.xz "$NOW_PATH"/
 chmod -R 755 "$NOW_PATH"/settings/
-ASH_STANDALONE=1 $BUSYBOX_PATH sh "$NOW_PATH"/settings/script/User.sh "$MODPATH" "$NOW_PATH"
+ASH_STANDALONE=1 $BUSYBOX_PATH sh "$NOW_PATH"/settings/script/User.sh "$MODPATH" "$NOW_PATH" "$VERSION"
