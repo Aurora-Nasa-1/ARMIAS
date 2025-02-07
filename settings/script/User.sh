@@ -55,7 +55,7 @@ main() {
     fi
 }
 main
-echo "- $USER_START"
+echo "$USER_START"
 ZIP_DIR="$NOW_PATH/files/modules/"
 if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
     echo "- $USER_FOUND_ZIP"
