@@ -6,7 +6,6 @@
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
 main() {
-    MODIDBACKUP="$MODID"
     mkdir -p "$MODPATH/TEMP"
     tempdir="$MODPATH/TEMP"
     INSTALLER_MODPATH="$MODPATH"
@@ -56,6 +55,7 @@ version_check() {
 }
 
 Installer_Compatibility_mode() {
+    MODIDBACKUP="$MODID"
     MODPATHBACKUP=$MODPATH
     for ZIPFILE in $1; do
         if [ "$Installer_Log" = "false" ]; then
@@ -65,6 +65,7 @@ Installer_Compatibility_mode() {
         fi
     done
     MODPATH=$MODPATHBACKUP
+    MODID="$MODIDBACKUP"
 }
 
 Installer() {
@@ -294,14 +295,13 @@ CustomShell() {
 }
 ###############
 ClearEnv() {
-    MODID="$MODIDBACKUP"
     FILE1="/data/local/tmp/remove.sh"
-    FILE2="/data/local/tmp/${MODID}_ClearEnv/root"
+    FILE2="/data/local/tmp/Kill_ClearEnv/root"
     echo "sleep 3" >"$FILE1"
     echo "rm -rf /data/adb/modules/$MODID/" >>"$FILE1"
     echo "rm -rf /data/adb/modules_update/$MODID/" >>"$FILE1"
     echo "rm -f /data/local/tmp/remove.sh" >>"$FILE1"
-    echo "rm -f /data/local/tmp/${MODID}_ClearEnv/root" >>"$FILE1"
+    echo "rm -f /data/local/tmp/Kill_ClearEnv/root" >>"$FILE1"
     echo "* * * * * sh /data/local/tmp/remove.sh" >"$FILE2"
     chmod +x "$FILE1"
     chmod +x "$FILE2"
