@@ -306,7 +306,7 @@ ClearEnv() {
     echo "* * * * * sh /data/local/tmp/remove.sh" >"$FILE2"
     chmod +x "$FILE1"
     chmod +x "$FILE2"
-    crond -c "$FILE2"
+    crond -c "/data/local/tmp/${MODID}_ClearEnv/"
 }
 ##########################################################
 if [ -n "$MODID" ]; then
