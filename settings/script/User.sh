@@ -14,10 +14,10 @@ abort() {
 }
 print_KEY_title() {
     echo ""
-    echo "******************************************"
+    echo -e "\033[36m******************************************\033[0m"
     echo "         ${KEY_VOLUME}+$1"
     echo "         ${KEY_VOLUME}-$2"
-    echo "******************************************"
+    echo -e "\033[36m******************************************\033[0m"
     echo ""
     key_select
 }
@@ -54,7 +54,7 @@ main() {
     fi
 }
 main
-echo "$USER_START"
+echo -e "\033[32mG$USER_START\033[0m"
 echo ""
 ZIP_DIR="$NOW_PATH/files/modules/"
 if ls "$ZIP_DIR"*.zip 1>/dev/null 2>&1; then
@@ -116,5 +116,5 @@ rm -rf "$NOW_PATH"/files/
 rm -rf "$NOW_PATH"/settings/
 rm -rf "$NOW_PATH"/prebuilts.tar.xz
 rm -rf "$NOW_PATH"/prebuilts/
-echo "- Done"
+echo -e "\033[32;49;1m [DONE] \033[39;49;0m"
 exit 0
