@@ -5,6 +5,7 @@
 ## Introduction
 
 This module aims to provide a highly customizable automated installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
+[Telegram](https://t.me/+w7TQLtEex00wMDk1)
 
 ## Basic Operations
 
