@@ -54,6 +54,12 @@
 
 - Magisk、KernelSU、APatchと互換性があります。
 
+## スター履歴
+
+<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);" src="https://star-history.com/embed?secret=Z2hwX1BVNlVHcHp2RmFmc3ZCODV2TDlZamNhSHpQQUVjbDNaSGNqVA==#Aurora-Nasa-1/ARMIAS&Date" frameBorder="0"></iframe>
+
+**このプロジェクトがお好きでしたら、Starをお願いします！**
+
 ## ありがとうございます
 
 - [Android_zstd_builds]
