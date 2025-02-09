@@ -56,7 +56,7 @@ This module aims to provide a highly customizable automated installation and con
 
 ## Star History
 
-<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;" src="https://star-history.com/embed?secret=Z2hwX1BVNlVHcHp2RmFmc3ZCODV2TDlZamNhSHpQQUVjbDNaSGNqVA==#Aurora-Nasa-1/ARMIAS&Date" frameBorder="0"></iframe>
+<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;" src="https://star-history.com/embed?secret=Z2hwXzA4c0c3RmJaaUp0dWxWeHdDSjJoM0ZLM1gwMjlNUjE0NFh3dw==#Aurora-Nasa-1/ARMIAS&Date" frameBorder="0"></iframe>
 
 **If you like this project, please give it a Star!**
 
