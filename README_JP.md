@@ -54,10 +54,6 @@
 
 - Magisk、KernelSU、APatchと互換性があります。
 
-## スター履歴
-
-<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;" src="https://star-history.com/embed?secret=Z2hwXzA4c0c3RmJaaUp0dWxWeHdDSjJoM0ZLM1gwMjlNUjE0NFh3dw==#Aurora-Nasa-1/ARMIAS&Date" frameBorder="0"></iframe>
-
 **このプロジェクトがお好きでしたら、Starをお願いします！**
 
 ## ありがとうございます
