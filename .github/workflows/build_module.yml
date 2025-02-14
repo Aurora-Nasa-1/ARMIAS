@@ -81,6 +81,7 @@ jobs:
             fi
             7z a -r -mx9 "ARMIAS_${LATEST_TAG}_${lang}_${GITHUB_SHA:0:7}.zip" * -x!*.git* -x!*.zip -x!latest_tag.txt -x!current_time.txt -x!LICENSE
             git checkout -- languages
+            git checkout -- README.md README_EN.md README_JP.md
           done
 
       - name: Upload zip files as artifacts
