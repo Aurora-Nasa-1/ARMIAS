@@ -83,6 +83,7 @@ jobs:
               git checkout -- languages
               git checkout -- README.md README_EN.md README_JP.md
             fi
+
           done
 
       - name: Create GitHub release
