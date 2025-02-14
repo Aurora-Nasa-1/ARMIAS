@@ -53,7 +53,12 @@ jobs:
           for lang in "${languages[@]}"; do
             # 清理不必要的文件和目录
             find languages -maxdepth 1 -mindepth 1 -type d ! -name "$lang" -exec rm -rf {} +
-            rm -f README.md README_*.md
+            if [ "$lang" = "en" ]; then
+              rm -f README.md README_JP.md
+            elif [ "$lang" = "jp" ]; then
+              rm -f README.md README_EN.md
+            elif [ "$lang" = "zh" ]; then
+              rm -f README_EN.md README_JP.md
             rm -f latest_tag.txt
             # 处理特定语言的文件和目录
             if [ -d "languages/$lang" ]; then

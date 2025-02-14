@@ -54,7 +54,13 @@ jobs:
           . ./settings/languages.ini
           for lang in "${languages[@]}"; do
             find languages -maxdepth 1 -mindepth 1 -type d ! -name "$lang" -exec rm -rf {} +
-            rm -f README.md README_*.md
+            if [ "$lang" = "en" ]; then
+              rm -f README.md README_JP.md
+            elif [ "$lang" = "jp" ]; then
+              rm -f README.md README_EN.md
+            elif [ "$lang" = "zh" ]; then
+              rm -f README_EN.md README_JP.md
+            fi
             if [ -d "languages/$lang" ]; then
               cp "languages/$lang"/* .
               cp "languages/$lang"/custom_script.sh ./settings/
