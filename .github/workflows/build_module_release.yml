@@ -78,7 +78,7 @@ jobs:
                 echo "description=${MODULE_DES} ${lang}" >> module.prop
                 cat module.prop
               fi
-              7z a -r -mx9 "ARMIAS_${LATEST_TAG}_${lang}" * -x!*.git* -x!*.zip -x!latest_tag.txt -x!current_time.txt -x!LICENSE
+              7z a -r -mx9 "ARMIAS_${LATEST_TAG}_${lang}.zip" * -x!*.git* -x!*.zip -x!latest_tag.txt -x!current_time.txt -x!LICENSE
               git checkout -- languages
               git checkout -- README.md README_EN.md README_JP.md
             done
