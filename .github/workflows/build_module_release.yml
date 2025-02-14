@@ -79,8 +79,9 @@ jobs:
               echo "description=${MODULE_DES}" >> module.prop
 
               # 压缩文件
-              7z a -r -mx9 "ARMIAS_${LATEST_TAG}_${lang}.zip" * -x!*.git* -x!*.md -x!*.zip -x!current_time.txt -x!LICENSE
+              7z a -r -mx9 "ARMIAS_${LATEST_TAG}_${lang}.zip" * -x!*.git* -x!*.zip -x!current_time.txt -x!LICENSE
               git checkout -- languages
+
             fi
           done
 
