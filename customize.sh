@@ -73,11 +73,24 @@ Installer() {
     if [ "$Installer_Log" != "false" ] && [ "$Installer_Log" != "true" ]; then
         Aurora_abort "Installer_Log$ERROR_INVALID_LOCAL_VALUE" 4
     fi
-    if [ "$2" != "" ]; then
-        if [ "$2" = "KSU" ] && [ "$KSU" != true ] || [ "$2" = "APATCH" ] && [ "$APATCH" != true ] || [ "$2" = "MAGISK" ] && [ -z "$APATCH" ] && [ -z "$KSU" ] && [ -n "$MAGISK_VER_CODE" ]; then
+    #test code
+    if [ "$2" = "KSU" ]; then
+        if [ "$KSU" != true ]; then
+            echo "KSU is not true, returning"
+            return
+        fi
+    elif [ "$2" = "APATCH" ]; then
+        if [ "$APATCH" != true ]; then
+            echo "APATCH is not true, returning"
+            return
+        fi
+    elif [ "$2" = "MAGISK" ]; then
+        if [ -z "$APATCH" ] && [ -z "$KSU" ] && [ -n "$MAGISK_VER_CODE" ]; then
+            echo "MAGISK condition met, returning"
             return
         fi
     fi
+    #end test code
     Aurora_ui_print "$MODULE_INTRO"
     if [ "$Installer_Compatibility" = "true" ]; then
         if [ "$Installer_Log" = "false" ]; then
