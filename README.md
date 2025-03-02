@@ -1,6 +1,6 @@
 **简体中文** | [日本語](README_JP.md) | [English](README_EN.md)
 
-本模块基于 [Aurora-Magisk-Modules-Framework]https://github.com/Aurora-Nasa-1/AMMF 开发
+本模块基于 [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF) 开发
 
 # 高自定义度的自动安装模块
 
