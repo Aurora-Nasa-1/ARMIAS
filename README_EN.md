@@ -1,10 +1,11 @@
 [简体中文](README.md) | [日本語](README_JP.md) | **English**
 
+This module is developed based on the [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF).
+
 # Highly Customizable Automatic Installation Module
 
 ## Introduction
 
-This module is developed based on the [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF).
 This module aims to provide a highly customizable automated installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
 [Telegram](https://t.me/+w7TQLtEex00wMDk1)
 

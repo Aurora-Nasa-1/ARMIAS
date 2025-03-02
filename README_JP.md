@@ -1,10 +1,11 @@
 [简体中文](README.md) | **日本語** | [English](README_EN.md)
 
+このモジュールは [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF) を基に開発されています。
+
 # 高自定义度の自動インストールモジュール
 
 ## 概要
 
-このモジュールは [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF) を基に開発されています。
 このモジュールは、高度にカスタマイズ可能な自動インストールおよび構成ソリューションを提供することを目的としており、複数の言語とさまざまな機能をサポートしています。これには、APKの一括インストール、インターネットからのファイルのダウンロード、インストール後のモジュールのパッチ適用などが含まれます。
 [Telegram](https://t.me/+w7TQLtEex00wMDk1)
 
