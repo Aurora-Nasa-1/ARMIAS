@@ -83,10 +83,12 @@ jobs:
             git checkout -- languages
             git checkout -- README.md README_EN.md README_JP.md
           done
-
+      - name: Set short SHA 
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+        
       - name: Upload zip files as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ARMIAS_all_languages_versions
+          name: ${{ github.event.repository.name }}_all_languages_versions_${{ env.SHORT_SHA }}
           path: |
             *.zip
