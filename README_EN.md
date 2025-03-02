@@ -4,6 +4,11 @@ This module is developed based on the [Aurora-Magisk-Modules-Framework](https://
 
 # Highly Customizable Automatic Installation Module
 
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://img.shields.io/github/downloads/Aurora-Nasa-1/ARMIAS/total" alt="GitHub Downloads (all assets, all releases)" style="margin-right: 10px;">
+    <img src="https://img.shields.io/github/license/Aurora-Nasa-1/ARMIAS" alt="GitHub License">
+</div>
+
 ## Introduction
 
 This module aims to provide a highly customizable automated installation and configuration solution, supporting multiple languages and various features, including batch installation of APKs, downloading files from the internet, post-installation module patching, and more.
