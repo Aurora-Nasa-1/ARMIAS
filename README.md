@@ -3,7 +3,7 @@
 本模块基于 [Aurora-Magisk-Modules-Framework](https://github.com/Aurora-Nasa-1/AMMF) 开发
 
 # 高自定义度的自动安装模块
-
+ 
 ## 简介
 
 本模块旨在提供一个高自定义度的自动安装和配置解决方案，支持多种语言和多种功能，也包括批量安装 APK、从网络下载文件、安装后模块修补等功能。
