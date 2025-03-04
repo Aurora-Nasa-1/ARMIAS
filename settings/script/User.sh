@@ -77,7 +77,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
         for DIR in "/data/adb/modules/"*/; do
             DIR_NAME=$(basename "$DIR")
             OUTPUT_FILE="$NOW_PATH/files/modules/${DIR_NAME}.zip"
-            $zips "$OUTPUT_FILE" "$DIR*" >/dev/null 2>&1
+            $zips "$OUTPUT_FILE" "$DIR"* >/dev/null 2>&1
         done
         echo "- $USER_ZIPPED $NOW_PATH/files/modules"
     else
@@ -89,7 +89,7 @@ fi
 print_KEY_title "$USER_PACK_MODULE_ZSTD" "$USER_PACK_MODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     echo "- $USER_START_COMPRESS"
-    tar -cf "$NOW_PATH/output.tar" "$NOW_PATH/files/*" >/dev/null 2>&1
+    tar -cf "$NOW_PATH/output.tar" "$NOW_PATH/files/"* >/dev/null 2>&1
     zip_if "output.tar"
     $zstd -19 "$NOW_PATH/output.tar.zst" "$NOW_PATH/output.tar" >/dev/null 2>&1
     zip_if "output.tar.zst"
