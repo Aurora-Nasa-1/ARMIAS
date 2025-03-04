@@ -70,4 +70,4 @@
 - [Zip-Rust]
 
 [Zstd]: https://github.com/facebook/zstd
-[Zip-Rust]: https://github.com/yxy-os/zip-rust://github.com/AestasBritannia/Hydro-Br-leur
+[Zip-Rust]: https://github.com/yxy-os/zip-rust
