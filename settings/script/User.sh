@@ -48,7 +48,7 @@ main() {
     if [ -f "$NOW_PATH/prebuilts.tar.xz" ]; then
         tar -xJf "$NOW_PATH/prebuilts.tar.xz" -C "$NOW_PATH/"
         zstd="$NOW_PATH/prebuilts/zstd"
-        zips="$NOW_PATH/prebuilts/7zzs"
+        zips="$NOW_PATH/prebuilts/zip"
         chmod 755 "$zips"
         chmod 755 "$zstd"
     fi
