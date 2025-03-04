@@ -5,7 +5,6 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
-jq="$MODPATH"/prebuilts/jq
 zstd="$MODPATH"/prebuilts/zstd
 zips="$MODPATH"/prebuilts/zip
 key_select() {
@@ -141,10 +140,18 @@ github_get_url() {
 
     local TEMP_FILE="$tempdir/github_get_url"
 
-    $jq -r '.assets[] | select(.name | test("'"$SEARCH_CHAR"'")) | .browser_download_url' "$wget_response_file" >"$TEMP_FILE"
-    if [ $? -ne 0 ]; then
+    cat "$wget_response_file" | tr -d '\n' | \
+    sed 's/.*"assets":\[//' | sed 's/\].*//' | \
+    tr '}' '\n' | \
+    grep "$SEARCH_CHAR" | \
+    awk -F'"browser_download_url":"' '{print $2}' | \
+    sed 's/".*//' > "$TEMP_FILE"
+
+    # 检查是否成功提取
+    if [ ! -s "$TEMP_FILE" ]; then
         rm -f "$wget_response_file" "$TEMP_FILE"
-        Aurora_abort "jq $COMMAND_FAILED"
+        Aurora_ui_print "$NOTFOUND_URL"
+        return 1
     fi
 
     DESIRED_DOWNLOAD_URL=$(cat "$TEMP_FILE")
