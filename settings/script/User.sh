@@ -77,7 +77,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
         for DIR in "/data/adb/modules/"*/; do
             DIR_NAME=$(basename "$DIR")
             OUTPUT_FILE="$NOW_PATH/files/modules/${DIR_NAME}.zip"
-            $zips a -r "$OUTPUT_FILE" "$DIR*" >/dev/null 2>&1
+            $zips "$OUTPUT_FILE" "$DIR*" >/dev/null 2>&1
         done
         echo "- $USER_ZIPPED $NOW_PATH/files/modules"
     else
@@ -96,14 +96,14 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     rm "$NOW_PATH"/output.tar
     cp "$NOW_PATH/output.tar.zst" "$MODPATH/output.tar.zst"
     rm -rf "$MODPATH/files/*"
-    $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
+    $zips "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "ARMIAS.zip"
     rm "$NOW_PATH/output.tar.zst"
 else
     echo "- $USER_START_COMPRESS"
     rm -rf "$MODPATH"/files/
     cp -r "$NOW_PATH/files" "$MODPATH/" >"/dev/null" 2>&1
-    $zips a -r "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
+    $zips "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "ARMIAS.zip"
 fi
 cp -r "$NOW_PATH/files/" "$MODPATH/" >"/dev/null" 2>&1
