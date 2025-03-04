@@ -66,10 +66,8 @@
 
 ## 感谢
 
-- [Android_zstd_builds]
 - [Zstd]
-- [7zzs]
+- [Zip-Rust]
 
-[Android_zstd_builds]: https://github.com/j2rong4cn/android-zstd-builds
 [Zstd]: https://github.com/facebook/zstd
-[7zzs]: https://github.com/AestasBritannia/Hydro-Br-leur
+[Zip-Rust]: https://github.com/yxy-os/zip-rust://github.com/AestasBritannia/Hydro-Br-leur
