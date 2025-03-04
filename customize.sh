@@ -125,7 +125,7 @@ Installer() {
         mkdir -p "$temp_dir"
         unzip -d "$temp_dir" "$1" >/dev/null 2>&1
         KSU_Installer_TEMP_ID=$(awk -F= '/^id=/ {print $2}' "$temp_dir/module.prop")
-        $zip7z a -r "$tempdir/KSU/temp.zip" "$SECURE_DIR/modules_update/$KSU_Installer_TEMP_ID"/* >/dev/null 2>&1
+        $zips "$tempdir/KSU/temp.zip" "$SECURE_DIR/modules_update/$KSU_Installer_TEMP_ID"/* >/dev/null 2>&1
         KSU_step_skip=true
         Installer "$tempdir/KSU/temp.zip" KSU
         rm -rf "$temp_dir"
@@ -144,7 +144,7 @@ initialize_install() {
     find "$dir" -mindepth 1 -maxdepth 1 -type d | while read -r entry; do
         local dirname=$(basename "$entry")
         local zip_file="$dir/$dirname.zip"
-        $zips a -r "$zip_file" "$entry/*" >/dev/null 2>&1
+        $zips "$zip_file" "$entry/*" >/dev/null 2>&1
         rm -rf "$entry"
     done
     find "$dir" -maxdepth 1 -type f -print0 | sort -z >"$temp_all_files"
