@@ -7,7 +7,7 @@
 # shellcheck disable=SC3045
 jq="$MODPATH"/prebuilts/jq
 zstd="$MODPATH"/prebuilts/zstd
-zips="$MODPATH"/prebuilts/7zzs
+zips="$MODPATH"/prebuilts/zip
 key_select() {
     key_pressed=""
     while true; do
