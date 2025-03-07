@@ -89,7 +89,7 @@ fi
 print_KEY_title "$USER_PACK_MODULE_ZSTD" "$USER_PACK_MODULE"
 if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     echo "- $USER_START_COMPRESS"
-    tar -cf "$NOW_PATH/output.tar" "$NOW_PATH/files/"* >/dev/null 2>&1
+    tar -C "$NOW_PATH/files" -cf "$NOW_PATH/output.tar" . >/dev/null 2>&1
     zip_if "output.tar"
     $zstd -19 "$NOW_PATH/output.tar.zst" "$NOW_PATH/output.tar" >/dev/null 2>&1
     zip_if "output.tar.zst"
