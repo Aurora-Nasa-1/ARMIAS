@@ -91,7 +91,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     echo "- $USER_START_COMPRESS"
     tar -C "$NOW_PATH/files" -cf "$NOW_PATH/output.tar" . >/dev/null 2>&1
     zip_if "output.tar"
-    $zstd -19 "$NOW_PATH/output.tar.zst" "$NOW_PATH/output.tar" >/dev/null 2>&1
+    $zstd -19 "$NOW_PATH/output.tar" -o "$NOW_PATH/output.tar.zst" >/dev/null 2>&1
     zip_if "output.tar.zst"
     rm "$NOW_PATH"/output.tar
     cp "$NOW_PATH/output.tar.zst" "$MODPATH/output.tar.zst"
