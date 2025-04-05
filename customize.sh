@@ -32,9 +32,7 @@ main() {
         mkdir -p "$MODPATH/prebuilts"
         tar -xJf "$MODPATH/prebuilts.tar.xz" -C "$MODPATH/"
     fi
-    set_permissions_755 "$jq"
     set_permissions_755 "$zips"
-    set_permissions_755 "$zstd"
     version_check
     sclect_settings_install_on_main
     patches_install

@@ -5,7 +5,6 @@
 # shellcheck disable=SC2155
 # shellcheck disable=SC2046
 # shellcheck disable=SC3045
-zstd="$MODPATH"/prebuilts/zstd
 zips="$MODPATH"/prebuilts/zip
 key_select() {
     key_pressed=""
@@ -79,18 +78,6 @@ App_data_patch_set_permissions() {
 mv_adb() {
     Aurora_test_input "mv_adb" "1" "$1"
     su -c mv "$MODPATH/$1"/* "/data/adb/"
-}
-un_zstd_tar() {
-    Aurora_test_input "un_zstd_tar" "1" "$1"
-    Aurora_test_input "un_zstd_tar" "2" "$2"
-    $zstd -d "$1" -o "$2/temp.tar"
-    tar -xf "$2/temp.tar" -C "$2"
-    rm "$2/temp.tar"
-    if [ $? -eq 0 ]; then
-        Aurora_ui_print "$UNZIP_FINNSH"
-    else
-        Aurora_ui_print "$UNZIP_ERROR"
-    fi
 }
 aurora_flash_boot() {
     Aurora_test_input "aurora_flash_boot" "1" "$1"
