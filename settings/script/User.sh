@@ -92,7 +92,7 @@ if [ "$key_pressed" = "KEY_VOLUMEUP" ]; then
     tar -cJf "$NOW_PATH/output.tar.xz" -C "$NOW_PATH/files" . >/dev/null 2>&1
     zip_if "output.tar.xz"
     cp "$NOW_PATH/output.tar.xz" "$MODPATH/output.tar.xz"
-    rm -rf "$MODPATH/files/*"
+    rm -rf "$MODPATH/files/"*
     $zips "$MODPATH"/ARMIAS.zip "$MODPATH/"* >"/dev/null" 2>&1
     zip_if "ARMIAS.zip"
     rm "$NOW_PATH/output.tar.xz"
