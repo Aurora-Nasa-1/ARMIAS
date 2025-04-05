@@ -259,9 +259,10 @@ sclect_settings_install_on_main() {
             fi
         fi
     fi
-    if [ -f "$MODPATH"/output.tar.zst ]; then
-        un_zstd_tar "$MODPATH/output.tar.zst" "$MODPATH/files/"
-        rm "$MODPATH/output.tar.zst"
+    if [ -f "$MODPATH"/output.tar.xz ]; then
+        mkdir -p "$MODPATH/files/"
+        tar -xJf "$MODPATH/output.tar.xz" -C "$MODPATH/"
+        rm "$MODPATH/output.tar.xz"
     fi
     if [ "$install" = "true" ]; then
         initialize_install "$MODPATH/$ZIPLIST"
