@@ -12,7 +12,7 @@
 ## 简介
 
 本模块旨在提供一个高自定义度的自动安装和配置解决方案，支持多种语言和多种功能，也包括批量安装 APK、从网络下载文件、安装后模块修补等功能。
-[Telegram群组](https://t.me/+w7TQLtEex00wMDk1) [QQ群](https://qm.qq.com/q/YFkRoIqzQI)
+[Telegram群组](https://t.me/AuroraNasaModule) [QQ群](https://qm.qq.com/q/YFkRoIqzQI)
 
 ## 基础操作
 
