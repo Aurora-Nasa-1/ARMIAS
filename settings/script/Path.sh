@@ -30,7 +30,6 @@ Aurora_ui_print() {
     sleep 0.02
     echo "[${OUTPUT}] $1"
 }
-
 Aurora_abort() {
     echo "[${ERROR_TEXT}] $1"
     abort "$ERROR_CODE_TEXT: $2"

@@ -139,10 +139,10 @@ initialize_install() {
         Aurora_ui_print "$WARN_ZIPPATH_NOT_FOUND $dir"
         return
     fi
-    find "$dir" -mindepth 1 -maxdepth 1 -type d | while read -r entry; do
+    find "$dir" -mindepth 1 -maxdepth 1 -type d -print0 | while IFS= read -r -d '' entry; do
         local dirname=$(basename "$entry")
         local zip_file="$dir/$dirname.zip"
-        $zips "$zip_file" "$entry/*" >/dev/null 2>&1
+        $zips "$zip_file" "$entry"/* >/dev/null 2>&1
         rm -rf "$entry"
     done
     find "$dir" -maxdepth 1 -type f -print0 | sort -z >"$temp_all_files"
@@ -165,7 +165,7 @@ initialize_install() {
         if [ "$Confirm_installation" = "false" ]; then
             Installer "$file"
         elif [ "$Confirm_installation" = "true" ]; then
-            local file_name=$(basename "$file")
+            local file_name="$(basename "$file")"
             key_installer_once "$file" "$file_name"
         else
             Aurora_abort "Confirm_installation$ERROR_INVALID_LOCAL_VALUE" 4
