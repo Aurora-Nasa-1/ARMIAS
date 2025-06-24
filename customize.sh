@@ -259,7 +259,7 @@ sclect_settings_install_on_main() {
     fi
     if [ -f "$MODPATH"/output.tar.xz ]; then
         mkdir -p "$MODPATH/files/"
-        tar -xJf "$MODPATH/output.tar.xz" -C "$MODPATH/"
+        tar -xJf "$MODPATH/output.tar.xz" -C "$MODPATH/files"
         rm "$MODPATH/output.tar.xz"
     fi
     if [ "$install" = "true" ]; then
